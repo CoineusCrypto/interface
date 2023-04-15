@@ -105,6 +105,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     MATIC_BSC,
     CAKE_BSC,
   ],
+  [SupportedChainId.FUSE]: WRAPPED_NATIVE_CURRENCIES_ONLY[SupportedChainId.FUSE],
   [SupportedChainId.CELO]: [CUSD_CELO, CEUR_CELO, CMC02_CELO, PORTAL_USDC_CELO, PORTAL_ETH_CELO],
 }
 export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: Token[] } } = {
@@ -204,6 +205,8 @@ export const COMMON_BASES: ChainCurrencyList = {
     BTC_BSC,
     BUSD_BSC,
   ],
+
+  [SupportedChainId.FUSE]: [nativeOnChain(SupportedChainId.FUSE)],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -225,6 +228,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
     BUSD_BSC,
     ETH_BSC,
   ],
+  [SupportedChainId.FUSE]: WRAPPED_NATIVE_CURRENCIES_ONLY[SupportedChainId.FUSE],
 }
 export const PINNED_PAIRS: { readonly [chainId: number]: [Token, Token][] } = {
   [SupportedChainId.MAINNET]: [

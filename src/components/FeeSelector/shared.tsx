@@ -13,6 +13,7 @@ export const FEE_AMOUNT_DETAIL: Record<
     supportedChains: [
       SupportedChainId.ARBITRUM_ONE,
       SupportedChainId.BNB,
+      SupportedChainId.FUSE,
       SupportedChainId.CELO,
       SupportedChainId.CELO_ALFAJORES,
       SupportedChainId.MAINNET,

@@ -309,7 +309,11 @@ export default function Swap({ className }: { className?: string }) {
       (parsedAmounts[Field.INPUT]?.currency.isToken
         ? (parsedAmounts[Field.INPUT] as CurrencyAmount<Token>)
         : undefined),
-    isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS(chainId) : undefined
+    chainId === 122
+      ? '0xa8C8a6C52AA280DefaE7F71C7557d5e10C972e6A'
+      : isSupportedChain(chainId)
+      ? UNIVERSAL_ROUTER_ADDRESS(chainId)
+      : undefined
   )
   const isApprovalLoading = allowance.state === AllowanceState.REQUIRED && allowance.isApprovalLoading
   const [isAllowancePending, setIsAllowancePending] = useState(false)

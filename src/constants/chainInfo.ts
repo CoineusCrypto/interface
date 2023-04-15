@@ -7,6 +7,7 @@ import bnbSquareLogoUrl from 'assets/svg/bnb_square_logo.svg'
 import bnbLogo from 'assets/svg/bnb-logo.svg'
 import celoLogo from 'assets/svg/celo_logo.svg'
 import celoSquareLogoUrl from 'assets/svg/celo_square_logo.svg'
+import fuseLogo from 'assets/svg/fuse.svg'
 import optimismSquareLogoUrl from 'assets/svg/optimism_square_logo.svg'
 import optimismLogoUrl from 'assets/svg/optimistic_ethereum.svg'
 import polygonSquareLogoUrl from 'assets/svg/polygon_square_logo.svg'
@@ -16,7 +17,7 @@ import ms from 'ms.macro'
 import { darkTheme } from 'theme/colors'
 
 import { SupportedL1ChainId, SupportedL2ChainId } from './chains'
-import { ARBITRUM_LIST, CELO_LIST, OPTIMISM_LIST, PLASMA_BNB_LIST } from './lists'
+import { ARBITRUM_LIST, CELO_LIST, FUSE_LIST, OPTIMISM_LIST, PLASMA_BNB_LIST } from './lists'
 
 export const AVERAGE_L1_BLOCK_TIME = ms`12s`
 
@@ -211,6 +212,21 @@ const CHAIN_INFO: ChainInfoMap = {
     squareLogoUrl: bnbSquareLogoUrl,
     nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
     defaultListUrl: PLASMA_BNB_LIST,
+    color: darkTheme.chain_56,
+    backgroundColor: darkTheme.chain_56_background,
+  },
+  [SupportedChainId.FUSE]: {
+    networkType: NetworkType.L1,
+    blockWaitMsBeforeWarning: ms`10m`,
+    docs: 'https://docs.fuse.io/',
+    explorer: 'https://explorer.fuse.io/',
+    infoLink: 'https://info.uniswap.org/#/bnb/',
+    label: 'FUSE Network',
+    logoUrl: fuseLogo,
+    circleLogoUrl: fuseLogo,
+    squareLogoUrl: fuseLogo,
+    nativeCurrency: { name: 'FUSE', symbol: 'FUSE', decimals: 18 },
+    defaultListUrl: FUSE_LIST,
     color: darkTheme.chain_56,
     backgroundColor: darkTheme.chain_56_background,
   },

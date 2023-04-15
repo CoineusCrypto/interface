@@ -424,6 +424,13 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } =
     'WBNB',
     'Wrapped BNB'
   ),
+  [SupportedChainId.FUSE]: new Token(
+    SupportedChainId.FUSE,
+    '0x0BE9e53fd7EDaC9F859882AfdDa116645287C629',
+    18,
+    'WFUSE',
+    'Wrapped FUSE'
+  ),
 }
 
 export function isCelo(chainId: number): chainId is SupportedChainId.CELO | SupportedChainId.CELO_ALFAJORES {
@@ -467,6 +474,10 @@ function isBsc(chainId: number): chainId is SupportedChainId.BNB {
   return chainId === SupportedChainId.BNB
 }
 
+function isFuse(chainId: number): chainId is SupportedChainId.FUSE {
+  return chainId === SupportedChainId.FUSE
+}
+
 class BscNativeCurrency extends NativeCurrency {
   equals(other: Currency): boolean {
     return other.isNative && other.chainId === this.chainId
@@ -482,6 +493,24 @@ class BscNativeCurrency extends NativeCurrency {
   public constructor(chainId: number) {
     if (!isBsc(chainId)) throw new Error('Not bnb')
     super(chainId, 18, 'BNB', 'BNB')
+  }
+}
+
+class FuseNativeCurrency extends NativeCurrency {
+  equals(other: Currency): boolean {
+    return other.isNative && other.chainId === this.chainId
+  }
+
+  get wrapped(): Token {
+    if (!isFuse(this.chainId)) throw new Error('Not fuse')
+    const wrapped = WRAPPED_NATIVE_CURRENCY[this.chainId]
+    invariant(wrapped instanceof Token)
+    return wrapped
+  }
+
+  public constructor(chainId: number) {
+    if (!isFuse(chainId)) throw new Error('Not fuse')
+    super(chainId, 18, 'FUSE', 'FUSE')
   }
 }
 
@@ -509,6 +538,8 @@ export function nativeOnChain(chainId: number): NativeCurrency | Token {
     nativeCurrency = getCeloNativeCurrency(chainId)
   } else if (isBsc(chainId)) {
     nativeCurrency = new BscNativeCurrency(chainId)
+  } else if (isFuse(chainId)) {
+    nativeCurrency = new FuseNativeCurrency(chainId)
   } else {
     nativeCurrency = ExtendedEther.onChain(chainId)
   }

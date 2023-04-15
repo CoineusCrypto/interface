@@ -6,10 +6,11 @@ import { isAddress } from 'utils'
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import BnbLogo from '../../assets/svg/bnb-logo.svg'
 import CeloLogo from '../../assets/svg/celo_logo.svg'
+import FuseLogo from '../../assets/svg/fuse.svg'
 import MaticLogo from '../../assets/svg/matic-token-icon.svg'
 import { isCelo, NATIVE_CHAIN_ID, nativeOnChain } from '../../constants/tokens'
 
-type Network = 'ethereum' | 'arbitrum' | 'optimism' | 'polygon' | 'smartchain'
+type Network = 'ethereum' | 'arbitrum' | 'optimism' | 'polygon' | 'smartchain' | 'fuse'
 
 export function chainIdToNetworkName(networkId: SupportedChainId): Network {
   switch (networkId) {
@@ -23,6 +24,8 @@ export function chainIdToNetworkName(networkId: SupportedChainId): Network {
       return 'polygon'
     case SupportedChainId.BNB:
       return 'smartchain'
+    case SupportedChainId.FUSE:
+      return 'fuse'
     default:
       return 'ethereum'
   }
@@ -35,6 +38,8 @@ export function getNativeLogoURI(chainId: SupportedChainId = SupportedChainId.MA
       return MaticLogo
     case SupportedChainId.BNB:
       return BnbLogo
+    case SupportedChainId.FUSE:
+      return FuseLogo
     case SupportedChainId.CELO:
     case SupportedChainId.CELO_ALFAJORES:
       return CeloLogo
@@ -51,8 +56,13 @@ function getTokenLogoURI(address: string, chainId: SupportedChainId = SupportedC
     SupportedChainId.OPTIMISM,
     SupportedChainId.BNB,
   ]
+
   if (networksWithUrls.includes(chainId)) {
     return `https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/${networkName}/assets/${address}/logo.png`
+  }
+
+  if (chainId === 122) {
+    return `https://coineus.app/assets/tokens/${networkName}/${address}/logo.png`
   }
 
   // Celo logo logo is hosted elsewhere.
